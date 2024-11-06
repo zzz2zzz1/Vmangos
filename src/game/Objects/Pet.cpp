@@ -1203,6 +1203,10 @@ void Pet::GivePetXP(uint32 xp)
     if (getPetType() != HUNTER_PET)
         return;
 
+    if (Player* pOwner = GetOwnerPlayer())
+        if (pOwner->GetPersonalXpRate() >= 0.0f)
+            xp *= pOwner->GetPersonalXpRate();
+
     if (xp < 1)
         return;
 
